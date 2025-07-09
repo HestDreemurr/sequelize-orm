@@ -1,0 +1,16 @@
+{
+  "name": "sequelize-orm",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "tsnd --transpile-only --respawn --ignore-watch node_modules --env-file .env src/index"
+  },
+  "keywords": [],
+  "author": "Hest",
+  "license": "MIT",
+  "description": "",
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
+  }
+}
