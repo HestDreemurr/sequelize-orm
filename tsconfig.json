@@ -4,7 +4,10 @@
     "module": "commonjs",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "paths": {
+      "#sequelize": ["./sequelize"]
+    }
   },
   "include": [
     "src/**/*.ts",
