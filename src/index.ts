@@ -1,9 +1,13 @@
-import { sequelize, Users } from "#sequelize";
+import { 
+  sequelize, 
+  Users,
+  Products
+} from "#sequelize";
 import { Op } from "sequelize";
 import { randomUUID } from "crypto";
 
 sequelize.sync();
-console.log("Sequelize sincronizado com o Banco de Dados.");
+console.log("[+] Sequelize sincronizado com o Banco de Dados.");
 
 
 /*
@@ -14,8 +18,8 @@ console.log("Sequelize sincronizado com o Banco de Dados.");
 async function saveUser() {
   const user = await Users.create({
     id: randomUUID(),
-    name: "Jonh Miller",
-    email: "jonhmiller@gmail.com"
+    name: "Hest",
+    email: "hest@gmail.com"
   });
   
   console.log(`Usuário criado: ${JSON.stringify(user, null, 2)}\n`);
@@ -44,7 +48,7 @@ async function findUser(email: string) {
   
   console.log(`Usuário encontrado: ${JSON.stringify(data, null, 2)}`);
 }
-// findUser("hest@gmail.com");
+// findUser("sky@gmail.com");
 // findUsers();
 
 // Atualizar usuários
@@ -75,3 +79,34 @@ async function deleteUsers() {
   console.log("Usuários deletados.");
 }
 // deleteUsers();
+
+/*
+  Associações com Sequelize
+*/
+
+async function saveProduct() {
+  const data = await Products.create({
+    id: randomUUID(),
+    name: "Bobbie Goods",
+    description: "Oh mãe, compra Bobbie Goods",
+    price: 10000,
+    userId: "c8afabb4-3ba5-4367-a2d1-61a657d95eba"
+  });
+  
+  console.log(`Produto criado: ${JSON.stringify(data, null, 2)}`);
+}
+// saveProduct();
+
+async function getUserProducts(email: string) {
+  const user = await Users.findOne({
+    where: {
+      email
+    },
+    include: Products
+  });
+  
+  console.log(`Usuário encontrado: ${JSON.stringify(user, null, 2)}`);
+  
+  // console.log(`Produtos encontrados: ${JSON.stringify(products, null, 2)}`);
+}
+// getUserProducts("hest@gmail.com");

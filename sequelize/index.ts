@@ -7,9 +7,9 @@ export const sequelize = new Sequelize(databaseURL, {
   logging: false
 });
 
-export const Users = sequelize.define("users", {
+const Users = sequelize.define("users", {
   id: {
-    type: DataTypes.STRING,
+    type: DataTypes.UUID,
     primaryKey: true
   },
   name: DataTypes.TEXT,
@@ -18,3 +18,19 @@ export const Users = sequelize.define("users", {
     unique: true
   }
 });
+
+const Products = sequelize.define("products", {
+  id: {
+    type: DataTypes.UUID,
+    primaryKey: true
+  },
+  name: DataTypes.TEXT,
+  description: DataTypes.TEXT,
+  price: DataTypes.INTEGER
+});
+
+// Associações
+Users.hasMany(Products);
+Products.belongsTo(Users);
+
+export { Users, Products };
